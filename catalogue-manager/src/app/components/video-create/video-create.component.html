@@ -27,9 +27,16 @@
         </div>
 
         <div class="form-group">
-          <button class="btn btn-success btn-lg btn-block" type="submit">Register</button>
+          <input type="file" accept="video/*" class="file-upload" (change)="readVideoUrl($event)">
+        </div>
+
+        <div class="form-group">
+          <button class="btn btn-success btn-lg btn-block" type="submit">Add Video</button>
         </div>
       </form>
+
+      <video #video style="display: none;" *ngIf="videoUrl" width="320" height="240" controls [attr.src]="videoUrl" (loadedmetadata)="getDuration($event)">
+      </video>
 
     </div>
   </div><!-- form card register -->
