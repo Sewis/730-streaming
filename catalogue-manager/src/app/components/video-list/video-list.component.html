@@ -7,20 +7,20 @@
     <thead class="table-success">
       <tr>
         <th scope="col">Video ID</th>
-        <th scope="col">Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">Designation</th>
-        <th scope="col">Phone No</th>
+        <th scope="col">Title</th>
+        <th scope="col">Upload Date</th>
+        <th scope="col">Category</th>
+        <th scope="col">Length</th>
         <th scope="col center">Update</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let video of Video; let i = index">
         <th scope="row">{{video._id}}</th>
-        <td>{{video.name}}</td>
-        <td>{{video.email}}</td>
-        <td>{{video.designation}}</td>
-        <td>{{video.phoneNumber}}</td>
+        <td>{{video.title}}</td>
+        <td>{{video.uploadDate}}</td>
+        <td>{{video.category}}</td>
+        <td>{{video.length}}</td>
         <td class="text-center edit-block">
           <span class="edit" [routerLink]="['/edit-video/', video._id]">
             <button type="button" class="btn btn-success btn-sm">Edit</button>
