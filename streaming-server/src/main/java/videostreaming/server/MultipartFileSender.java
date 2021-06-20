@@ -1,4 +1,4 @@
-package de.hoel.video.server;
+package videostreaming.server;
 
 import java.io.BufferedInputStream;
 import java.io.File;

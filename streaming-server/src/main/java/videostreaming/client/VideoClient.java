@@ -1,4 +1,4 @@
-package de.hoel.video.client;
+package videostreaming.client;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;

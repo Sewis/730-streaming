@@ -17,7 +17,7 @@
  * Copyright 2009, 2010, 2011, 2012, 2013, 2014 Caprica Software Limited.
  */
 
-package de.hoel.video.client;
+package videostreaming.client;
 
 import java.nio.file.Paths;
 import javax.swing.UIManager;

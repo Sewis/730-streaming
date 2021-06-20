@@ -1,4 +1,4 @@
-package de.hoel.video.server;
+package videostreaming.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
