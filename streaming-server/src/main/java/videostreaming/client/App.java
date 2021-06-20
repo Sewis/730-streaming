@@ -1,14 +1,17 @@
-package de.hoel.video.client;
+package videostreaming.client;
 
 import java.awt.BorderLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -45,13 +48,6 @@ public class App extends JFrame
       {
         super.mouseClicked(e);
         System.out.println("Mouse Clicked. (" + e.getX() + "," + e.getY() + ")");
-      }
-      
-      @Override
-      public void mouseWheelMoved(MouseWheelEvent e)
-      {
-        super.mouseWheelMoved(e);
-        System.out.println("Mouse wheel moved. " + e.getScrollAmount());
       }
       
       @Override
@@ -98,8 +94,17 @@ public class App extends JFrame
       @Override
       public void windowClosing(WindowEvent e)
       {
+        mediaPlayerComponent.getMediaPlayer().stop();
+        mediaPlayerComponent.getMediaPlayer().release();
         mediaPlayerComponent.release();
-        System.exit(0);
+        
+        SwingUtilities.invokeLater(new Runnable()
+        {
+          public void run()
+          {
+            App.this.dispose();
+          }
+        });
       }
     });
     JPanel contentPane = new JPanel();
@@ -110,13 +115,70 @@ public class App extends JFrame
     
     JPanel videoControlsPane = new JPanel();
     videoControlsPane.setBorder(videoBorder);
-    playButton = new JButton("Play");
+    
+    playButton = new JButton("Play")
+    {
+      {
+        try
+        {
+          Image img = ImageIO.read(getClass().getResource("icons8-play-30.png")).getScaledInstance(20, 20, Image.SCALE_DEFAULT);
+          setIcon(new ImageIcon(img));
+        }
+        catch (IOException e1)
+        {
+          e1.printStackTrace();
+        }
+      }
+    };
+    
     videoControlsPane.add(playButton);
-    pauseButton = new JButton("Pause");
+    pauseButton = new JButton("Pause")
+    {
+      {
+        try
+        {
+          Image img = ImageIO.read(getClass().getResource("icons8-pause-30.png")).getScaledInstance(20, 20, Image.SCALE_DEFAULT);;
+          setIcon(new ImageIcon(img));
+        }
+        catch (IOException e1)
+        {
+          e1.printStackTrace();
+        }
+      }
+    };
+    
     videoControlsPane.add(pauseButton);
-    rewindButton = new JButton("Rewind");
+    rewindButton = new JButton("Rewind")
+    {
+      {
+        try
+        {
+          Image img = ImageIO.read(getClass().getResource("icons8-rewind-30.png")).getScaledInstance(20, 20, Image.SCALE_DEFAULT);
+          setIcon(new ImageIcon(img));
+        }
+        catch (IOException e1)
+        {
+          e1.printStackTrace();
+        }
+      }
+    };
+    
     videoControlsPane.add(rewindButton);
-    skipButton = new JButton("Skip");
+    skipButton = new JButton("Forward")
+    {
+      {
+        try
+        {
+          Image img = ImageIO.read(getClass().getResource("icons8-fast-forward-30.png")).getScaledInstance(20, 20, Image.SCALE_DEFAULT);;
+          setIcon(new ImageIcon(img));
+        }
+        catch (IOException e1)
+        {
+          e1.printStackTrace();
+        }
+      }
+    };
+    
     videoControlsPane.add(skipButton);
     JPanel controlsPane = new JPanel();
     controlsPane.add(videoControlsPane);
@@ -154,12 +216,13 @@ public class App extends JFrame
     this.setVisible(true);
   }
   
-  public void loadVideo(String path)
+  public void loadVideo(Video video)
   {
-    mediaPlayerComponent.getMediaPlayer().playMedia(path);
+    mediaPlayerComponent.getMediaPlayer().playMedia(video.getUrlID());
+    setTitle(video.getTitle());
   }
   
-  public static void main(String[] args)
+  public static App init()
   {
     new NativeDiscovery().discover();
     
@@ -178,6 +241,29 @@ public class App extends JFrame
     App application = new App(TITLE);
     application.initialize();
     application.setVisible(true);
-    application.loadVideo("http://localhost:8080/videos/test");
+    application.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    try
+    {
+      application.setIconImage(ImageIO.read(App.class.getResource("icons8-circled-play-30.png")).getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+    }
+    catch (IOException e)
+    {
+      e.printStackTrace();
+    }
+    
+    return application;
+  }
+  
+  public static void main(String... args)
+  {
+    App app = init();
+    
+    app.loadVideo(VideoAcquirer.getVideosFromTestSample().get(0));
+  }
+  
+  public static void openVideoPlayer(Video video)
+  {
+    init().loadVideo(video);
+    
   }
 }

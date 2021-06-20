@@ -17,7 +17,7 @@
  * Copyright 2009-2018 Caprica Software Limited.
  */
 
-package de.hoel.video.client;
+package videostreaming.client;
 
 import java.awt.Dimension;
 import java.awt.Font;

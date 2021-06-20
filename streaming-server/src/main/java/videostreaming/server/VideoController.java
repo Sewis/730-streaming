@@ -1,4 +1,4 @@
-package de.hoel.video.server;
+package videostreaming.server;
 
 import java.nio.file.Paths;
 import javax.servlet.http.HttpServletRequest;
