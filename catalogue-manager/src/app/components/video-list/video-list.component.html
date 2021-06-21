@@ -6,7 +6,8 @@
   <table class="table table-bordered" *ngIf="Video.length > 0">
     <thead class="table-success">
       <tr>
-        <th scope="col">Video ID</th>
+        <!--<th scope="col">Video ID</th>-->
+        <th scole="col">Thumbnail</th>
         <th scope="col">Title</th>
         <th scope="col">Upload Date</th>
         <th scope="col">Category</th>
@@ -16,17 +17,18 @@
     </thead>
     <tbody>
       <tr *ngFor="let video of Video; let i = index">
-        <th scope="row">{{video._id}}</th>
-        <td>{{video.title}}</td>
-        <td>{{video.uploadDate}}</td>
-        <td>{{video.category}}</td>
-        <td>{{video.length}}</td>
+        <!--<th scope="row">{{video._id}}</th>-->
+        <th> <img [src]=getThumbnail(video) width="200" height="100" /> </th>
+        <td><b>{{video.title}}</b></td>
+        <td><b>{{video.uploadDate | date:'dd/MM/yyyy'}}</b></td>
+        <td><b>{{video.category}}</b></td>
+        <td><b>{{formatSeconds(video.length)}}</b></td>
         <td class="text-center edit-block">
           <span class="edit" [routerLink]="['/edit-video/', video._id]">
-            <button type="button" class="btn btn-success btn-sm">Edit</button>
-          </span>
+            <button type="button" class="btn btn-outline-primary"><b>Edit</b></button>
+          </span><br />
           <span class="delete" (click)="removeVideo(video, i)">
-            <button type="button" class="btn btn-danger btn-sm">Delete</button>
+            <button type="button" class="btn btn-outline-primary"><b>Delete</b></button>
           </span>
         </td>
       </tr>
