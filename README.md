@@ -22,4 +22,6 @@ LINK
 
 # Project Management Planning
 
-LINK
+Kanban Board for RAD Cycle management:
+
+https://github.com/Sewis/730-streaming/projects/1
