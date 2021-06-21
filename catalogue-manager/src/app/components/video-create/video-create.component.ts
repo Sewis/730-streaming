@@ -13,7 +13,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class VideoCreateComponent implements OnInit {  
   submitted = false;
   videoForm: FormGroup;
-  VideoProfile:any = ['Finance', 'BDM', 'HR', 'Sales', 'Admin']
+  VideoProfile:any = ['Sport', 'Technology', 'Nature', 'Food', 'Children', 'Science']
   
   videoUrl;
   videoDuration;

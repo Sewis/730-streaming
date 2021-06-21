@@ -23,7 +23,7 @@ describe('AppComponent', () => {
   it(`should have as title 'mean-stack-crud-app'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('mean-stack-crud-app');
+    expect(app.title).toEqual('Catalogue Manager');
   });
 
   it('should render title in a h1 tag', () => {

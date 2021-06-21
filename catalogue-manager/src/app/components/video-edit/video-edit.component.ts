@@ -15,7 +15,7 @@ export class VideoEditComponent implements OnInit {
   submitted = false;
   editForm: FormGroup;
   videoData: Video[];
-  VideoProfile: any = ['Finance', 'BDM', 'HR', 'Sales', 'Admin']
+  VideoProfile:any = ['Sport', 'Technology', 'Nature', 'Food', 'Children', 'Science']
 
   constructor(
     public fb: FormBuilder,
@@ -29,16 +29,14 @@ export class VideoEditComponent implements OnInit {
     let id = this.actRoute.snapshot.paramMap.get('id');
     this.getVideo(id);
     this.editForm = this.fb.group({
-      name: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
-      designation: ['', [Validators.required]],
-      phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]+$')]]
+      title: ['', [Validators.required]],
+      category: ['', [Validators.required]],
     })
   }
 
   // Choose options with select-dropdown
   updateProfile(e) {
-    this.editForm.get('designation').setValue(e, {
+    this.editForm.get('category').setValue(e, {
       onlySelf: true
     })
   }
@@ -51,20 +49,16 @@ export class VideoEditComponent implements OnInit {
   getVideo(id) {
     this.apiService.getVideo(id).subscribe(data => {
       this.editForm.setValue({
-        name: data['name'],
-        email: data['email'],
-        designation: data['designation'],
-        phoneNumber: data['phoneNumber'],
+        title: data['title'],
+        category: data['category']
       });
     });
   }
 
   updateVideo() {
     this.editForm = this.fb.group({
-      name: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
-      designation: ['', [Validators.required]],
-      phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]+$')]]
+      title: ['', [Validators.required]],
+      category: ['', [Validators.required]],
     })
   }
 
@@ -73,16 +67,14 @@ export class VideoEditComponent implements OnInit {
     if (!this.editForm.valid) {
       return false;
     } else {
-      if (window.confirm('Are you sure?')) {
-        let id = this.actRoute.snapshot.paramMap.get('id');
-        this.apiService.updateVideo(id, this.editForm.value)
-          .subscribe(res => {
-            this.router.navigateByUrl('/videos-list');
-            console.log('Content updated successfully!')
-          }, (error) => {
-            console.log(error)
-          })
-      }
+      let id = this.actRoute.snapshot.paramMap.get('id');
+      this.apiService.updateVideo(id, this.editForm.value)
+        .subscribe(res => {
+          this.router.navigateByUrl('/videos-list');
+          console.log('Content updated successfully!')
+        }, (error) => {
+          console.log(error)
+        })
     }
   }
 
