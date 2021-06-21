@@ -18,12 +18,12 @@ u15059350@tuks.co.za
 
 # User Manual
 
-The user manual should includes:
+The user manual includes:
 - A brief non-technical description of the project.
 - The sub-component layout, without extensive technical information.
 - Implemented use cases with appropriate screenshots.
 
-LINK
+https://github.com/Sewis/730-streaming/blob/main/User%20Manual.pdf
 
 # Project Management Planning
 
